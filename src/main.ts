@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
+import VueTimers from './plugins/vue-timers';
+
+Vue.use(VueTimers);
 
 Vue.config.productionTip = false;
 

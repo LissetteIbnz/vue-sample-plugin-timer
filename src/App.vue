@@ -1,29 +1,68 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div>
+    <div class="card" style="width: 18rem; margin-bottom: 2rem">
+      <div class="card-body">
+        <h5 class="card-title">
+          <h1>{{ count }}</h1>
+        </h5>
+        <p class="card-text">
+          <span v-if="timer">Running</span>
+          <span v-else>Stopped</span>
+        </p>
+        <button
+          type="button"
+          class="btn btn-success"
+          @click="startTimer"
+        >
+          Start
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          @click="stopTimer"
+        >
+          Stop
+        </button>
+      </div>
+    </div>
+    <hr />
+    <p>
+      <button
+        type="button"
+        style="margin-right: 2rem"
+        class="btn btn-primary"
+        @click="toggleInterval"
+      >
+        Toggle interval
+      </button>
+      <strong>Interval:</strong> {{ interval }}
+    </p>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import Vue, { VueConstructor } from 'vue';
 
 export default Vue.extend({
-  name: 'app',
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      // timer: null as number | null, // handler del setInterval
+      count: 0,
+      // interval: 1000, // tiempo entre disparos del setInterval
+    };
+  },
+  // methods: {
+  //   toggleInterval() {
+  //     this.interval = this.interval === 1000 ? 100 : 1000;
+  //   },
+  // },
+  timers: {
+    clock: { // opciones de mi temporizador
+    interval: 1000,
+      onTick() {
+        ++(this as any).count;
+      },
+    },
   },
 });
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
